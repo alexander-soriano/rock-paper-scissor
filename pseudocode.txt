@@ -1,0 +1,4 @@
+Player pick rock, paper, or scissor.
+CPU will pick rock, paper, or scissor randomly.
+Rock beats scissor. Scissor beats paper. Paper beats rock. Else is TIE.
+Output text if win, lose, or tie.
