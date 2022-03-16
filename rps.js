@@ -1,6 +1,10 @@
+function gameStart(bestOf){
+
 let round=0;
 let playerScore=0;
 let computerScore=0;
+game(bestOf);
+gameResult();
 
 function randomNumber(max){
     return Math.floor(Math.random()*max)+1
@@ -57,10 +61,11 @@ function game(bestOfRounds){
 
 function gameResult(){
     if(playerScore>computerScore){
-        console.log(`Player WIN with score of player:${playerScore} & computer:${computerScore}`)
+        console.log(`Player WIN with number of rounds:${round}, score of player:${playerScore} & computer:${computerScore}`)
     }else if(playerScore<computerScore){
-        console.log(`Player LOSE with score of player:${playerScore} & computer:${computerScore}`)
+        console.log(`Player LOSE with number of rounds:${round}, score of player:${playerScore} & computer:${computerScore}`)
     }else{
-        console.log(`Game was TIED with score of player:${playerScore} & computer:${computerScore}`)
+        console.log(`Game was TIED with number of rounds:${round}, score of player:${playerScore} & computer:${computerScore}`)
     }
+}
 }
