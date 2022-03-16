@@ -47,17 +47,15 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-function game(numberOfRounds){
-    for(let i=0; i<numberOfRounds; i++){
+function game(bestOfRounds){
+    for(let i=0; playerScore<bestOfRounds && computerScore<bestOfRounds; i++){
         round++;
         let playerSelection = prompt("RPS?");
         console.log(playRound(playerSelection,computerPlay()));
     }
 }
 
-function gameResult(numberOfRounds){
-    game(numberOfRounds);
-
+function gameResult(){
     if(playerScore>computerScore){
         console.log(`Player WIN with score of player:${playerScore} & computer:${computerScore}`)
     }else if(playerScore<computerScore){
