@@ -47,9 +47,22 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-function game(){
-    for(let i=0; i<5; i++){
+function game(numberOfRounds){
+    for(let i=0; i<numberOfRounds; i++){
+        round++;
         let playerSelection = prompt("RPS?");
         console.log(playRound(playerSelection,computerPlay()));
+    }
+}
+
+function gameResult(numberOfRounds){
+    game(numberOfRounds);
+
+    if(playerScore>computerScore){
+        console.log(`Player WIN with score of player:${playerScore} & computer:${computerScore}`)
+    }else if(playerScore<computerScore){
+        console.log(`Player LOSE with score of player:${playerScore} & computer:${computerScore}`)
+    }else{
+        console.log(`Game was TIED with score of player:${playerScore} & computer:${computerScore}`)
     }
 }
