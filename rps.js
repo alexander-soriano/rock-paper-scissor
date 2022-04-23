@@ -1,10 +1,39 @@
-function gameStart(bestOf){
-
 let round=0;
 let playerScore=0;
 let computerScore=0;
-game(bestOf);
-gameResult();
+let playerSelection = 0;
+let computerSelection = 0;
+let roundResult = 'Click any buttons to start';
+let finalResult = '';
+
+const container = document.querySelector('.container');
+
+const roundResultDiv = document.createElement('div');
+roundResultDiv.classList.add('roundResult');
+container.appendChild(roundResultDiv);
+roundResultDiv.textContent= `${roundResult}`
+
+
+
+// game(5);
+// gameResult();
+
+// const button = document.querySelectorAll('button');
+// document.addEventListener('click', (e) => {
+//     if (e.target.nodeName=='BUTTON')
+//     console.log(e.target.textContent);
+// })
+
+const button = document.querySelectorAll('button');
+document.addEventListener('click', playRound)
+
+// function game(bestOfRounds){
+//     for(let i=0; playerScore<bestOfRounds && computerScore<bestOfRounds; i++){
+//         round++;
+//         let playerSelection = prompt("RPS?");
+//         console.log(playRound(playerSelection,computerPlay()));
+//     }
+// }
 
 function randomNumber(max){
     return Math.floor(Math.random()*max)+1
@@ -13,50 +42,55 @@ function randomNumber(max){
 function computerPlay(){
     let number = randomNumber(3)
     if (number===1){
-        return "rock";
+        computerSelection = "rock";
     }else if (number===2){
-        return "paper"
+        computerSelection = "paper"
     }else if (number===3){
-        return "scissor"
+        computerSelection = "scissor"
     }else {
-        return "ERROR"
+        computerSelection = "ERROR"
     }
 }
 
-function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
+function playRound(e){
+    if(e.target.nodeName!='BUTTON'){return};
+    playerSelection = (e.target.textContent).toLowerCase();
+    computerPlay();
+
+    
 
     if (playerSelection==='rock' && computerSelection==='scissor'){
         playerScore++
-        return "You win. Rock beats Scissor";
+        roundResult = "You win. Rock beats Scissor";
     } else if (playerSelection==='rock' && computerSelection==='paper'){
         computerScore++
-        return "You lose. Rock loses to Paper";
+        roundResult = "You lose. Rock loses to Paper";
     } else if (playerSelection==='paper' && computerSelection==='rock'){
         playerScore++
-        return "You win. Paper beats Rock";
+        roundResult = "You win. Paper beats Rock";
     } else if (playerSelection==='paper' && computerSelection==='scissor'){
         computerScore++
-        return "You lose. Paper loses to Scissor";
+        roundResult = "You lose. Paper loses to Scissor";
     } else if (playerSelection==='scissor' && computerSelection==='paper'){
         playerScore++
-        return "You win. Scissor beats Scissor";
+        roundResult = "You win. Scissor beats Scissor";
     } else if (playerSelection==='scissor' && computerSelection==='rock'){
         computerScore++
         return "You lose. Scissor loses to Paper"
     } else if (playerSelection===computerSelection){
-        return "It's a tie.";
+        roundResult = "It's a tie.";
     } else {
-        return "Hey! No cheating";
+        roundResult = "Hey! No cheating";
     }
-}
+    if(roundResult!="It's a tie.") round++;
 
-function game(bestOfRounds){
-    for(let i=0; playerScore<bestOfRounds && computerScore<bestOfRounds; i++){
-        round++;
-        let playerSelection = prompt("RPS?");
-        console.log(playRound(playerSelection,computerPlay()));
-    }
+    if(playerScore==5){
+        finalResult = 'You win'
+    }else if(computerScore==5){
+        finalResult = 'You lose'
+    }else{}
+    
+    roundResultDiv.innerHTML= `Round: ${round} <br /> ${roundResult} <br /> Player: ${playerScore} <br /> Computer:${computerScore} <br /> ${finalResult}`
 }
 
 function gameResult(){
@@ -68,4 +102,5 @@ function gameResult(){
         console.log(`Game was TIED with number of rounds:${round}, score of player:${playerScore} & computer:${computerScore}`)
     }
 }
-}
+
+
